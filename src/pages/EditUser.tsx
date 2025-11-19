@@ -16,7 +16,9 @@ const EditUser: React.FC = () => {
 
   useEffect(() => {
     if (!id) return;
+
     setLoading(true);
+
     fetchUser(Number(id))
       .then((u) => setUser(u))
       .catch((err) => setError(err.message || "Could not fetch user"))
@@ -26,8 +28,9 @@ const EditUser: React.FC = () => {
   const onSubmit = async (data: User) => {
     if (!id) return;
     setBusy(true);
+
     try {
-      const updated = await updateUser(Number(id), data);
+      await updateUser(Number(id), data);
       alert(`User updated (simulated).`);
       navigate("/");
     } catch (err: any) {
@@ -49,5 +52,6 @@ const EditUser: React.FC = () => {
     </>
   );
 };
+
 
 export default EditUser;
